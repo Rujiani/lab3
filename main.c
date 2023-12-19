@@ -1,6 +1,9 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include "array.h"
 int main(){
-    int input;
+    int input, size_of_array = 1, max_index = 0, input_index, size_pr_arr; 
+    int *array, *size = &size_of_array, *max_ind = &max_index; 
     do{
         printf("1 Create array\n");
         printf("2 Add new number\n");
@@ -12,6 +15,7 @@ int main(){
         scanf("%d", &input);
         switch (input){
             case 1:
+                create_array(array);
                 break;
             case 2:
                 break;
@@ -24,6 +28,8 @@ int main(){
             case 6:
                 break;
             case 7:
+                printf("Exiting\n");
+                free(array);
                 break;
             default:
                 break;

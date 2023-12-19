@@ -1,3 +1,3 @@
 main:
-	cc main.c -o prog
+	cc main.c array.c -o prog
 
