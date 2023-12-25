@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include "array.h"
 int main(){
-    int input, size_of_array = 1, max_index = 0, input_index, size_pr_arr; 
-    int *array, *size = &size_of_array, *max_ind = &max_index; 
-    do{
+   int input, *array, max_index = 0, *max_ind = &max_index, size_arr = 1, *size = &size_arr;
+      do{
         printf("1 Create array\n");
         printf("2 Add new number\n");
         printf("3 Delete number\n");
@@ -18,6 +17,10 @@ int main(){
                 create_array(array);
                 break;
             case 2:
+                int index, num;
+                printf("Input num and index\n");
+                scanf("%d %d", &num, &index);
+                add_element(array, size, max_ind, num, index);
                 break;
             case 3:
                 break;
