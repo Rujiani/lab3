@@ -1,11 +1,19 @@
 #include <stdlib.h>
 #include <stdio.h>
+int * clearing_garbage(int * array, int max_ind, int size){
+    for(int i = max_ind; i < size; i++){
+        array[i]=0;
+    }
+    return array;
+}
+
 int * create_array(int * array){
     array = calloc(1, sizeof(int));
     return array;
 }
 
 int * add_element(int * array, int * size, int * max_ind, int num, int index){
+    int temp = *max_ind;
     if(index > *max_ind){
         *max_ind = index;
     }
@@ -14,10 +22,12 @@ int * add_element(int * array, int * size, int * max_ind, int num, int index){
             *size *= 2;
         }
         array = realloc(array, (*size) * sizeof(int));
+        array = clearing_garbage(array, temp, *size);
     }
     if(array[*size - 1] != 0 && array[index] != 0){
        *size *=2;
       array = realloc(array, (*size) * sizeof(int));
+      array = clearing_garbage(array, temp, *size);
     }
     else if(array[index] != 0){
        for(int i = *size; i > index; i--){
@@ -49,7 +59,7 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
     if((*max_ind) == index){
         for(int i = (*max_ind); i >=0; i--){
             if(array[i] != 0){
-                *max_ind == i;
+                *max_ind = i;
                 break;
             }
         }
@@ -57,8 +67,8 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
     for(int i = index; i < (*size - 1); i++){
         array[i] = array[i + 1];
     }
-    while((((*size) / 2) - 1) > (*max_ind) || (!(*max_ind) && (*size) == 1)){
-        *size /= 2;
+    while(((*size) / 2) - 1 > (*max_ind) || (*size == 1 && *max_ind == 0)){
+        (*size) /= 2;
     }
     array = realloc(array, (*size) * sizeof(int));
     return array;

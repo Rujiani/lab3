@@ -1,5 +1,6 @@
 #ifndef ARRAY_H
 #define ARRAY_H
+int * clearing_garbage(int * array, int max_ind, int size);
 int *create_array(int * array);
 int *remove_element(int * array, int * max_ind, int * size, int index);
 void print_array(int * array, int * size);
