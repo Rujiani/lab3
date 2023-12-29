@@ -46,10 +46,18 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
         return array;
     }
     array[index] = 0;
+    if((*max_ind) == index){
+        for(int i = (*max_ind); i >=0; i--){
+            if(array[i] != 0){
+                *max_ind == i;
+                break;
+            }
+        }
+    }
     for(int i = index; i < (*size - 1); i++){
         array[i] = array[i + 1];
     }
-    while(((*size) / 2) - 1 > (*max_ind)){
+    while((((*size) / 2) - 1) > (*max_ind) || (!(*max_ind) && (*size) == 1)){
         *size /= 2;
     }
     array = realloc(array, (*size) * sizeof(int));
