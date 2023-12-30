@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "array.h"
 int main(){
-   int input, *array, max_index = 0, *max_ind = &max_index, size_arr = 1, *size = &size_arr;
+   int input, *array = NULL, max_index = 0, *max_ind = &max_index, size_arr = 1, *size = &size_arr, *arr_pr = NULL, pr_size, *pr_sz = &pr_size;
       do{
         printf("Menu:\n");
         printf("1 Create array\n");
@@ -28,18 +28,20 @@ int main(){
                 printf("Input index\n");
                 scanf("%d", &index);
                 array = remove_element(array, max_ind, size, index);
-                printf("Element was deleted\n");
                 break;
             case 4:
+                arr_pr = create_pr_array(array, max_ind, pr_sz);
                 break;
             case 5:
                 print_array(array, size);
                 break;
             case 6:
+                print_array(arr_pr, pr_sz);
                 break;
             case 7:
                 printf("Exiting\n");
                 free(array);
+                free(arr_pr);
                 break;
             default:
                 break;
