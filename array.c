@@ -106,6 +106,10 @@ int *create_pr_array(int *array, int *max_ind, int * pr_sz){
             pr_array[counter - 1] = array[i];
         }
     }
+    if(size <= 2){
+            printf("ERROR\n");
+            return NULL;
+        }
     *pr_sz = size;
     return pr_array;
 }
