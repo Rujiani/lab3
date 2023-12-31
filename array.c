@@ -71,15 +71,16 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
         (*size) /= 2;
     }
     array = realloc(array, (*size) * sizeof(int));
-    printf("Element was deleted\n");
     return array;
 }
 
-int *create_pr_array(int *array, int *max_ind, int * pr_sz){
-    int *pr_array, difference, temp_element, first = 0;
+int *create_pr_array(int *array, int *max_ind, int * pr_sz, int * size_ar){
+    int *pr_array, difference, temp_element, first = 0, *temp_array = array;
     for(int i = 0; i <= *max_ind; i++){
         if(array[i] != 0 && !first){
             first = array[i];
+            array  = remove_element(array, max_ind, size_ar, i);
+            i--;
         }
         else if(array[i] != 0){
             difference = array[i] - first;
@@ -94,7 +95,7 @@ int *create_pr_array(int *array, int *max_ind, int * pr_sz){
     temp_element = first;
     pr_array = calloc(size, sizeof(int));
     pr_array[0] = first;
-    for(int i = 1; i <= *max_ind; i++){
+    for(int i = 0; i <= *max_ind; i++){
         if(array[i] != 0 && (array[i] - temp_element == difference)){
             counter++;
             if(counter > size){
@@ -104,10 +105,14 @@ int *create_pr_array(int *array, int *max_ind, int * pr_sz){
             }
             temp_element = array[i];
             pr_array[counter - 1] = array[i];
+            array  = remove_element(array, max_ind, size_ar, i);
+            i--;
         }
     }
     if(size <= 2){
             printf("ERROR\n");
+            array = temp_array;
+            free(temp_array);
             return NULL;
         }
     *pr_sz = size;
