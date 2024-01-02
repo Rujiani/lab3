@@ -109,6 +109,16 @@ int *create_pr_array(int **array, int *max_ind, int * pr_sz, int * size_ar){
             }
         }
     } 
+    for(int i = 0; i <= max_pr_index; i++){
+        if(pr_array[i]){
+            for(int j = 0; j <= *max_ind; j++){
+               if(pr_array[i] == t_array[j]){
+                    t_array = remove_element(t_array, max_ind, size_ar, j);
+                    j--;
+               }
+            }
+        }
+    }
     free(*array);
     *array = t_array;
     return pr_array;
