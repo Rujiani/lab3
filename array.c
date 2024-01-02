@@ -86,6 +86,26 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
 }
 
 int *create_pr_array(int **array, int *max_ind, int * pr_sz, int * size_ar){
-    *array = remove_element(*array, max_ind, size_ar, 3); 
-    return NULL;
+    int * t_array = calloc(*size_ar, sizeof(int)), diff = 0, max_pr_index = 0, *max_pr_index_ptr = &max_pr_index;         //diff - progression difference
+    for(int i = 0; i < *size_ar; i++){
+        t_array[i] = (*array)[i];
+    }
+    int * pr_array = calloc(1, sizeof(int));
+    for(int i = 0; i < *max_ind; i++){
+        if(t_array[i]){
+            for(int j = i + 1; j <= *max_ind; j++){
+                if(t_array[j] && (!diff)){
+                    diff = (t_array[j] - t_array[i]);
+                    pr_array[0] = t_array[i];
+                    *pr_sz = 1;
+                }
+                if(t_array[j] && (t_array[j] - t_array[i] == diff)){
+                    pr_array = add_element(pr_array, pr_sz, max_pr_index_ptr, t_array[j], *max_pr_index_ptr + 1);
+                }
+            }
+        }
+    }
+    free(*array);
+    *array = t_array;
+    return pr_array;
 }
