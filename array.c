@@ -75,12 +75,16 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
             *max_ind = 0;
         }
     }
-    for(int i = index; i < (*size - 1); i++){
-        array[i] = array[i + 1];
+    else{
+        *max_ind -= 1;
+        for(int i = index; i < (*size - 1); i++){
+            array[i] = array[i + 1];
+        }
+        array[*size - 1] = 0;             // clear stuff
     }
-    while(((*size) / 2) - 1 > (*max_ind) || (*size == 2 && *max_ind == 0)){
+    while(((*size) / 2) - 1 >= (*max_ind)){
         (*size) /= 2;
-    }
+    }  
     array = size_down(array, size);
     return array;
 }
@@ -104,7 +108,7 @@ int *create_pr_array(int **array, int *max_ind, int * pr_sz, int * size_ar){
                 }
             }
         }
-    }
+    } 
     free(*array);
     *array = t_array;
     return pr_array;
