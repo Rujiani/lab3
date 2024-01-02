@@ -14,6 +14,11 @@ int * size_up(int * array, int * size, int max_ind){
     return array;
 } 
 
+int * size_down(int * array, int * size){
+    array = realloc(array, *size * sizeof(int));
+    return array;
+}
+
 int * create_array(int * array){
     array = calloc(1, sizeof(int));
     return array;
@@ -76,7 +81,7 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
     while(((*size) / 2) - 1 > (*max_ind) || (*size == 2 && *max_ind == 0)){
         (*size) /= 2;
     }
-    array = realloc(array, (*size) * sizeof(int));
+    array = size_down(array, size);
     return array;
 }
 

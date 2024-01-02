@@ -31,6 +31,7 @@ int main(){
                 break;
             case 4:
                 arr_pr = create_pr_array(array, max_ind, pr_sz, size);
+                array = size_down(array, size);
                 break;
             case 5:
                 print_array(array, size);
