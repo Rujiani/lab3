@@ -30,8 +30,8 @@ int main(){
                 array = remove_element(array, max_ind, size, index);
                 break;
             case 4:
-                arr_pr = create_pr_array(array, max_ind, pr_sz, size);
-                array = size_down(array, size);
+                int **ptr_array = &array;
+                arr_pr = create_pr_array(ptr_array, max_ind, pr_sz, size);
                 break;
             case 5:
                 print_array(array, size);

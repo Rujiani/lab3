@@ -85,6 +85,7 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
     return array;
 }
 
-int *create_pr_array(int *array, int *max_ind, int * pr_sz, int * size_ar){
+int *create_pr_array(int **array, int *max_ind, int * pr_sz, int * size_ar){
+    *array = remove_element(*array, max_ind, size_ar, 3); 
     return NULL;
 }
