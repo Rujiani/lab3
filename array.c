@@ -1,11 +1,18 @@
 #include <stdlib.h>
 #include <stdio.h>
+
 int * clearing_garbage(int * array, int max_ind, int size){
     for(int i = max_ind; i < size; i++){
         array[i]=0;
     }
     return array;
 }
+
+int * size_up(int * array, int * size, int max_ind){
+    array = realloc(array, (*size) * sizeof(int));
+    array = clearing_garbage(array, max_ind, *size);
+    return array;
+} 
 
 int * create_array(int * array){
     array = calloc(1, sizeof(int));
@@ -21,13 +28,11 @@ int * add_element(int * array, int * size, int * max_ind, int num, int index){
         while(*size < (*max_ind + 1)){
             *size *= 2;
         }
-        array = realloc(array, (*size) * sizeof(int));
-        array = clearing_garbage(array, temp, *size);
+        array = size_up(array, size, temp);
     }
     if(array[*size - 1] != 0 && array[index] != 0){
        *size *=2;
-      array = realloc(array, (*size) * sizeof(int));
-      array = clearing_garbage(array, temp, *size);
+        array = size_up(array, size, temp);
     }
     else if(array[index] != 0){
        for(int i = *size; i > index; i--){
@@ -62,12 +67,13 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
                 *max_ind = i;
                 break;
             }
+            *max_ind = 0;
         }
     }
     for(int i = index; i < (*size - 1); i++){
         array[i] = array[i + 1];
     }
-    while(((*size) / 2) - 1 > (*max_ind) || (*size == 1 && *max_ind == 0)){
+    while(((*size) / 2) - 1 > (*max_ind) || (*size == 2 && *max_ind == 0)){
         (*size) /= 2;
     }
     array = realloc(array, (*size) * sizeof(int));
@@ -75,47 +81,5 @@ int *remove_element(int * array, int * max_ind, int * size, int index){
 }
 
 int *create_pr_array(int *array, int *max_ind, int * pr_sz, int * size_ar){
-    int *pr_array, difference, temp_element, first = 0, *temp_array = array;
-    for(int i = 0; i <= *max_ind; i++){
-        if(array[i] != 0 && !first){
-            first = array[i];
-            array  = remove_element(array, max_ind, size_ar, i);
-            i--;
-        }
-        else if(array[i] != 0){
-            difference = array[i] - first;
-            break;
-        }      
-    } 
-    if(!first){
-        printf("ERROR\n");
-        return NULL;
-    }
-    int counter = 1, size = 1;
-    temp_element = first;
-    pr_array = calloc(size, sizeof(int));
-    pr_array[0] = first;
-    for(int i = 0; i <= *max_ind; i++){
-        if(array[i] != 0 && (array[i] - temp_element == difference)){
-            counter++;
-            if(counter > size){
-                size *=2;
-                pr_array = realloc(pr_array, size * sizeof(int));
-                pr_array = clearing_garbage(pr_array, counter, size);
-            }
-            temp_element = array[i];
-            pr_array[counter - 1] = array[i];
-            array  = remove_element(array, max_ind, size_ar, i);
-            i--;
-        }
-    }
-    if(size <= 2){
-            printf("ERROR\n");
-            array = temp_array;
-            free(temp_array);
-            return NULL;
-        }
-    *pr_sz = size;
-    return pr_array;
+    return NULL;
 }
-
