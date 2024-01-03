@@ -11,6 +11,12 @@ int main(){
         printf("5 Exit\n");
       do{
         scanf("%d", &input);
+        if (feof(stdin)){
+            printf("EOF\n");
+            free(array);
+            free(arr_pr);
+            return -1;
+        }
         switch (input){
             case 1:
                 array = create_array(array);
