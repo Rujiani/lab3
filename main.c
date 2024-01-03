@@ -14,6 +14,7 @@ int main(){
         switch (input){
             case 1:
                 array = create_array(array);
+                print_array(array, size);
                 break;
             case 2:
                 int index, num;
@@ -32,6 +33,9 @@ int main(){
             case 4:
                 int **ptr_array = &array;
                 arr_pr = create_pr_array(ptr_array, max_ind, pr_sz, size);
+                printf("Old array: ");
+                print_array(array, size);
+                printf("New array: ");
                 print_array(arr_pr, pr_sz);
                 break;
             case 5:
