@@ -109,6 +109,7 @@ int *create_pr_array(int **array, int *max_ind, int * pr_sz, int * size_ar){
             }
         }
     } 
+    int temp_size = *size_ar, temp_max_index = *max_ind;
     for(int i = 0; i <= max_pr_index; i++){
         if(pr_array[i]){
             for(int j = 0; j <= *max_ind; j++){
@@ -118,6 +119,13 @@ int *create_pr_array(int **array, int *max_ind, int * pr_sz, int * size_ar){
                }
             }
         }
+    }
+    if(max_pr_index < 3){
+        free(t_array);
+        *max_ind = temp_max_index;
+        *size_ar = temp_size;
+        printf("ERROR\n");
+        return NULL;
     }
     free(*array);
     *array = t_array;

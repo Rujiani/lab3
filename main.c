@@ -31,6 +31,11 @@ int main(){
             clear_buffer();
             continue;
         }
+        
+        if(!array && input != 1){
+            printf("You must create array first\n");
+            continue;
+        }
 
         switch (input){
             case 1:
@@ -53,10 +58,12 @@ int main(){
             case 4:
                 int **ptr_array = &array;
                 arr_pr = create_pr_array(ptr_array, max_ind, pr_sz, size);
-                printf("Old array: ");
-                print_array(array, size);
-                printf("New array: ");
-                print_array(arr_pr, pr_sz);
+                if(arr_pr){
+                    printf("Old array: ");
+                    print_array(array, size);
+                    printf("New array: ");
+                    print_array(arr_pr, pr_sz);
+                }
                 break;
             case 5:
                 printf("Exiting\n");
@@ -64,6 +71,7 @@ int main(){
                 free(arr_pr);
                 break;
             default:
+                printf("Please input number (1 - 5)\n");
                 break;
         }
     }
