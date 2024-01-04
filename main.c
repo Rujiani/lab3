@@ -36,7 +36,10 @@ int main(){
             printf("You must create array first\n");
             continue;
         }
-
+        else if(array && input == 1){
+            printf("Array already created\n");
+            continue;
+        }
         switch (input){
             case 1:
                 array = create_array(array);
@@ -57,6 +60,7 @@ int main(){
                 break;
             case 4:
                 int **ptr_array = &array;
+                free(arr_pr);
                 arr_pr = create_pr_array(ptr_array, max_ind, pr_sz, size);
                 if(arr_pr){
                     printf("Old array: ");
