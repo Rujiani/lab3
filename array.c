@@ -120,7 +120,7 @@ int *create_pr_array(int **array, int *max_ind, int * pr_sz, int * size_ar){
             }
         }
     }
-    if(max_pr_index < 3){
+    if(*pr_sz < 4){
         free(t_array);
         *max_ind = temp_max_index;
         *size_ar = temp_size;
